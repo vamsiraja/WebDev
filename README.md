@@ -3,7 +3,7 @@
 Starter project with:
 - **Frontend:** React (Vite)
 - **Backend:** Node.js + Express
-- **Database:** MySQL (local instance)
+- **Database:** MySQL 8
 - **Auth:** Register/Login with bcrypt password hashing + JWT
 
 ## 1) Project structure
@@ -11,15 +11,15 @@ Starter project with:
 - `frontend/` React app for login/register UI
 - `backend/` Express API with auth endpoints
 - `sql/init.sql` Database schema
+- `docker-compose.yml` Local MySQL service
 
-## 2) Setup (without Docker)
+## 2) Setup
 
 ### Prerequisites
 
 - Node.js 18+
 - npm 9+
-- MySQL running locally
-- phpMyAdmin access (as you mentioned)
+- Docker (recommended for MySQL)
 
 ### Install dependencies
 
@@ -28,34 +28,17 @@ npm --prefix backend install
 npm --prefix frontend install
 ```
 
-### Create DB/table via phpMyAdmin
+### Start MySQL
 
-1. Open phpMyAdmin.
-2. Create a database named `saas_auth` (or another name you prefer).
-3. Open the `Import` tab for that database.
-4. Import `sql/init.sql`.
-
-> If you choose a different DB name, update `DB_NAME` in `backend/.env`.
+```bash
+docker compose up -d
+```
 
 ### Configure environment files
 
 ```bash
 cp backend/.env.example backend/.env
 cp frontend/.env.example frontend/.env
-```
-
-Then update `backend/.env` based on your local MySQL/phpMyAdmin setup (common XAMPP defaults shown):
-
-```env
-PORT=4000
-CLIENT_ORIGIN=http://localhost:5173
-DB_HOST=localhost
-DB_PORT=3306
-DB_USER=root
-DB_PASSWORD=
-DB_NAME=saas_auth
-JWT_SECRET=replace_with_secure_secret
-JWT_EXPIRES_IN=1d
 ```
 
 ## 3) Run the app
